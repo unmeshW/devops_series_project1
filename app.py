@@ -1,3 +1,8 @@
+from flask import Flask
+import datetime
+
+app = Flask(__name__)  # <-- Must be defined before @app.route
+
 @app.route('/')
 def home():
     return """
@@ -34,3 +39,6 @@ def get_users():
     </body>
     </html>
     """
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
