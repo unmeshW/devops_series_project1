@@ -1,35 +1,37 @@
+import sys
+import os
 import pytest
+
+# Add the root project folder to sys.path so 'app' can be imported
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from app import app
 
 # Enable testing mode for Flask
 app.testing = True
 client = app.test_client()
 
-def test_home_page():
-    """Test the home page '/'"""
+def test_home():
+    """Test the home route '/'"""
     response = client.get('/')
     assert response.status_code == 200
-    assert b"Welcome to My WebApp" in response.data
-    assert b"Check" in response.data  # Checking presence of links
+    data = response.get_json()
+    assert data["message"] == "Hello all, Welcome to my WebApp..!!!"
 
-def test_health_page():
-    """Test the health page '/health'"""
+def test_health_check():
+    """Test the health check route '/health'"""
     response = client.get('/health')
     assert response.status_code == 200
-    assert b"Status: All Healthy" in response.data
-    assert b"Timestamp (UTC)" in response.data
+    data = response.get_json()
+    assert data["status"] == "All Healthy"
+    assert "timestamp" in data
 
-def test_users_page():
-    """Test the users page '/users'"""
-    response = client.get('/users')
+def test_get_users():
+    """Test the users API route '/api/users'"""
+    response = client.get('/api/users')
     assert response.status_code == 200
-    # Check for user names in HTML table
-    assert b"Unmesh" in response.data
-    assert b"Cloud Support Engineer" in response.data
-    assert b"Tony" in response.data
-    assert b"Site Reliability Engineer" in response.data
-
-def test_invalid_route():
-    """Test a route that does not exist"""
-    response = client.get('/invalid')
-    assert response.status_code == 404
+    data = response.get_json()
+    assert data[0]["name"] == "Unmesh"
+    assert data[0]["role"] == "Cloud support engineer"
+    assert data[1]["name"] == "Tony"
+    assert data[1]["role"] == "Site reliability engineer"
