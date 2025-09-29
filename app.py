@@ -1,5 +1,4 @@
 from flask import Flask, jsonify
-from config import APP_CONFIG
 import random, datetime
 
 app = Flask(__name__)
