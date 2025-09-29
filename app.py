@@ -17,8 +17,8 @@ def health_check():
 @app.route('/api/users')
 def get_users():
     users = [
-        {"id": 01, "name": "Unmesh", "role": "Cloud support engineer"},
-        {"id": 02, "name": "Tony", "role": "Site reliability engineer"}
+        {"id": 101, "name": "Unmesh", "role": "Cloud support engineer"},
+        {"id": 102, "name": "Tony", "role": "Site reliability engineer"}
     ]
     return jsonify(users)
 
