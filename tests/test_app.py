@@ -2,12 +2,10 @@ import sys
 import os
 import pytest
 
-# Add project root to sys.path
+# Ensure parent directory is in path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 from app import app
 
-# Enable testing mode
 app.testing = True
 client = app.test_client()
 
@@ -16,7 +14,7 @@ def test_home():
     response = client.get('/')
     assert response.status_code == 200
     html = response.data.decode('utf-8')
-    assert "Welcome to my WebApp" in html  # check if expected text exists
+    assert "Hello all, Welcome to my WebApp" in html
 
 def test_health_check():
     """Test the health check route '/health'"""
@@ -25,12 +23,11 @@ def test_health_check():
     html = response.data.decode('utf-8')
     assert "All Healthy" in html
 
-def test_get_users():
-    """Test the users API route '/api/users'"""
-    response = client.get('/api/users')
+def test_users():
+    """Test the users route '/users'"""
+    response = client.get('/users')
     assert response.status_code == 200
     html = response.data.decode('utf-8')
-    # Make sure expected user names exist in the output
     assert "Unmesh" in html
     assert "Cloud support engineer" in html
     assert "Tony" in html
