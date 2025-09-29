@@ -14,7 +14,7 @@ def test_home():
     response = client.get('/')
     assert response.status_code == 200
     html = response.data.decode('utf-8')
-    assert "Hello all, Welcome to my WebApp" in html
+    assert "Hello all, Welcome to my Flask WebApp..!!!" in html
 
 def test_health_check():
     """Test the health check route '/health'"""
