@@ -10,7 +10,6 @@ def home():
     <head><title>My Webpage</title></head>
     <body>
     <h1>Hello all, Welcome to my Flask WebApp..!!!</h1>
-    <p>
     </body>
     </html>
     """
