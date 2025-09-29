@@ -7,10 +7,10 @@ app = Flask(__name__)  # <-- Must be defined before @app.route
 def home():
     return """
     <html>
-    <head><title>My WebApp</title></head>
+    <head><title>My Webpage</title></head>
     <body>
-    <h1>Hello all, Welcome to my WebApp..!!!</h1>
-    <p>Check <a href="/health">Health Status</a> or <a href="/users">Users List</a></p>
+    <h1>Hello all, Welcome to my Flask WebApp..!!!</h1>
+    <p>
     </body>
     </html>
     """
