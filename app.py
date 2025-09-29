@@ -1,5 +1,5 @@
 from flask import Flask
-import datetime
+from datetime import datetime, timezone
 
 app = Flask(__name__)  # <-- Must be defined before @app.route
 
@@ -23,7 +23,7 @@ def health_check():
     <p>Timestamp: {}</p>
     </body>
     </html>
-    """.format(datetime.datetime.utcnow())
+    """.format(datetime.now(timezone.utc).isoformat())
 
 @app.route('/users')
 def get_users():
