@@ -22,11 +22,5 @@ def get_users():
     ]
     return jsonify(users)
 
-
-@app.route('/api/config')
-def get_config():
-    return jsonify(APP_CONFIG)
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-
